@@ -2036,6 +2036,26 @@ void process_commands()
         fanSpeed = 0;
         break;
     #endif //FAN_PIN
+    #if defined(FAN_CONTROLLER_I2C)
+      case 106: // M106 Fan On
+      {
+        if (code_seen('P')) {
+          // Ignore
+        }
+        if (code_seen('S')) {
+          FanControllerI2C::setSpeed(constrain(code_value(),0,255));
+        }
+        else {
+          FanControllerI2C::setSpeed(255);
+        }
+        break;
+      }
+      case 107: // M107 Fan Off - deprecated
+      {
+        FanControllerI2C::setSpeed(0);
+        break;
+      }
+    #endif // defined (FAN_CONTROLLER_I2C)
     #ifdef BARICUDA
       // PWM for HEATER_1_PIN
       #if defined(HEATER_1_PIN) && HEATER_1_PIN > -1

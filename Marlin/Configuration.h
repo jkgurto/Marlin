@@ -72,7 +72,7 @@
 // 21 = Elefu Ra Board (v3)
 
 #ifndef MOTHERBOARD
-#define MOTHERBOARD 7
+#define MOTHERBOARD 5 // Gen6
 #endif
 
 // Define this to set a custom name for your generic Mendel,
@@ -688,6 +688,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 //define BlinkM/CyzRgb Support
 //#define BLINKM
+
+// Support for an I2C Fan Controller
+#include "FanControllerI2C.h"
 
 /*********************************************************************\
 * R/C SERVO support
