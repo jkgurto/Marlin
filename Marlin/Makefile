@@ -44,11 +44,12 @@ ARDUINO_INSTALL_DIR  ?= D:/Programs/Arduino
 ARDUINO_VERSION      ?= 105
 
 # You can optionally set a path to the avr-gcc tools. Requires a trailing slash. (ex: /usr/local/avr-gcc/bin)
-AVR_TOOLS_PATH ?= D:\Programs\WinAVR-20100110\bin
+#AVR_TOOLS_PATH ?= D:\Programs\WinAVR-20100110\bin
+AVR_TOOLS_PATH ?= $(ARDUINO_INSTALL_DIR)/hardware/tools/avr/bin
 
 #Programmer configuration
-UPLOAD_RATE        ?= 250000
-AVRDUDE_PROGRAMMER ?= arduino
+UPLOAD_RATE        ?= 57600
+AVRDUDE_PROGRAMMER ?= stk500v1
 UPLOAD_PORT        ?= COM10
 
 #Directory used to build files in, contains all the build files, from object files to the final hex file.
@@ -216,6 +217,15 @@ TARGET = $(notdir $(CURDIR))
 VPATH = .
 VPATH += $(BUILD_DIR)
 VPATH += $(HARDWARE_SRC)
+
+# Arduino 105
+VPATH += $(ARDUINO_INSTALL_DIR)/hardware/Sanguino/cores/arduino 
+VPATH += $(ARDUINO_INSTALL_DIR)/hardware/Sanguino/variants/standard 
+VPATH += $(ARDUINO_INSTALL_DIR)/libraries/LiquidCrystal
+VPATH += $(ARDUINO_INSTALL_DIR)/libraries/SPI
+VPATH += $(ARDUINO_INSTALL_DIR)/libraries/Wire
+VPATH += $(ARDUINO_INSTALL_DIR)/libraries/Wire/utility
+
 ifeq ($(HARDWARE_VARIANT), arduino)
 VPATH += $(ARDUINO_INSTALL_DIR)/libraries/LiquidCrystal
 VPATH += $(ARDUINO_INSTALL_DIR)/libraries/SPI
@@ -262,6 +272,10 @@ CXXSRC = WMath.cpp WString.cpp Print.cpp Marlin_main.cpp	\
 	stepper.cpp temperature.cpp cardreader.cpp ConfigurationStore.cpp \
 	watchdog.cpp SPI.cpp Servo.cpp Tone.cpp ultralcd.cpp digipot_mcp4451.cpp \
 	vector_3.cpp qr_solve.cpp
+
+# Mine
+CXXSRC += FanControllerI2C.cpp
+
 ifeq ($(LIQUID_TWI2), 0)
 CXXSRC += LiquidCrystal.cpp
 else
@@ -296,14 +310,14 @@ OPT = s
 DEFINES ?=
 
 # Program settings
-CC = $(AVR_TOOLS_PATH)avr-gcc
-CXX = $(AVR_TOOLS_PATH)avr-g++
-OBJCOPY = $(AVR_TOOLS_PATH)avr-objcopy
-OBJDUMP = $(AVR_TOOLS_PATH)avr-objdump
-AR  = $(AVR_TOOLS_PATH)avr-ar
-SIZE = $(AVR_TOOLS_PATH)avr-size
-NM = $(AVR_TOOLS_PATH)avr-nm
-AVRDUDE = avrdude
+CC = $(AVR_TOOLS_PATH)/avr-gcc
+CXX = $(AVR_TOOLS_PATH)/avr-g++
+OBJCOPY = $(AVR_TOOLS_PATH)/avr-objcopy
+OBJDUMP = $(AVR_TOOLS_PATH)/avr-objdump
+AR  = $(AVR_TOOLS_PATH)/avr-ar
+SIZE = $(AVR_TOOLS_PATH)/avr-size
+NM = $(AVR_TOOLS_PATH)/avr-nm
+AVRDUDE = $(AVR_TOOLS_PATH)/avrdude
 REMOVE = rm -f
 MV = mv -f
 

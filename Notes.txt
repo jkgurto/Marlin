@@ -1,8 +1,18 @@
 # Backup printer
 # USB doesn't work
-#avrdude -v -v -v -v -D -c stk500v1 -b 250000 -p atmega644p -P COM10 -U flash:r:backup.hex
+#avrdude -v -v -v -v -D -c stk500v1 -b 250000 -p atmega644p -P COM10 -U flash:r:backup.hex:i
 #-C D:/Programs/Arduino/hardware/tools/avr/etc/avrdude.conf
 
 # Programmer
 avrdude -v -v -v -v -D -c usbtiny -p atmega644p -U flash:r:backup.hex
 
+# From Arduino IDE
+#stk500v1
+#57600
+# READ
+avrdude -c stk500v1 -b 57600 -p atmega644p -P COM10 -U flash:r:backup.hex:i
+# WRITE
+avrdude -c stk500v1 -b 57600 -p atmega644p -P COM10 -U flash:r:applet/Marlin.hex:i
+
+
+D:\Programs\Arduino\hardware\tools\avr\bin\avr-g++ -c -g -Os -Wall -fno-exceptions -ffunction-sections -fdata-sections -mmcu=atmega644p -DF_CPU=16000000L -MMD -DUSB_VID=null -DUSB_PID=null -DARDUINO=105 -ID:\Programs\Arduino\hardware\Sanguino\cores\arduino -ID:\Programs\Arduino\hardware\Sanguino\variants\standard -ID:\Programs\Arduino\libraries\Wire -ID:\Programs\Arduino\libraries\LiquidCrystal -ID:\Programs\Arduino\libraries\SPI C:\Users\jacqui\AppData\Local\Temp\build3716682092124676348.tmp\BlinkM.cpp -o C:\Users\jacqui\AppData\Local\Temp\build3716682092124676348.tmp\BlinkM.cpp.o 

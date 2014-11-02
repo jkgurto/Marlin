@@ -23,7 +23,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(jkhawkins, Gen6 config)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -142,8 +142,10 @@
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 -1
-#define TEMP_SENSOR_1 -1
+// From Gen6 circuit diagram
+// Sensor 0 = 100k thermistor, 4k7 pull-up
+#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_BED 0
 
@@ -327,12 +329,12 @@ your extruder heater takes 2 minutes to hit the target on heating.
 #endif
 
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
-const bool X_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool Y_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool Y_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool X_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 //#define DISABLE_MAX_ENDSTOPS
 //#define DISABLE_MIN_ENDSTOPS
 
@@ -363,19 +365,19 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
-#define X_HOME_DIR -1
-#define Y_HOME_DIR -1
-#define Z_HOME_DIR -1
+#define X_HOME_DIR 1
+#define Y_HOME_DIR 1
+#define Z_HOME_DIR 1
 
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // Travel limits after homing
-#define X_MAX_POS 205
+#define X_MAX_POS 240
 #define X_MIN_POS 0
-#define Y_MAX_POS 205
+#define Y_MAX_POS 240
 #define Y_MIN_POS 0
-#define Z_MAX_POS 200
+#define Z_MAX_POS 120
 #define Z_MIN_POS 0
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
