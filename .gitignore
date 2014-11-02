@@ -5,4 +5,4 @@ applet/
 *.rej
 *.bak
 nbproject/
-
+*.swp

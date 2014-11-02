@@ -44,12 +44,12 @@ ARDUINO_INSTALL_DIR  ?= D:/Programs/Arduino
 ARDUINO_VERSION      ?= 105
 
 # You can optionally set a path to the avr-gcc tools. Requires a trailing slash. (ex: /usr/local/avr-gcc/bin)
-AVR_TOOLS_PATH ?=
+AVR_TOOLS_PATH ?= D:\Programs\WinAVR-20100110\bin
 
 #Programmer configuration
-UPLOAD_RATE        ?= 115200
+UPLOAD_RATE        ?= 250000
 AVRDUDE_PROGRAMMER ?= arduino
-UPLOAD_PORT        ?= /dev/arduino
+UPLOAD_PORT        ?= COM10
 
 #Directory used to build files in, contains all the build files, from object files to the final hex file.
 BUILD_DIR          ?= applet
@@ -58,7 +58,7 @@ BUILD_DIR          ?= applet
 LIQUID_TWI2        ?= 0
 
 # this defines if Wire is needed
-WIRE               ?= 0
+WIRE               ?= 1
 
 ############################################################################
 # Below here nothing should be changed...
